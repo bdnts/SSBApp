@@ -5,14 +5,30 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>SSBApp</title>
-    <base href="~/" />
-    <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css" />
-    <link href="css/site.css" rel="stylesheet" />
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>SSBApp</title>
+	<base href="~/" />
+	<environment include="Development">
+		<link rel="stylesheet" href="css/bootstrap/bootstrap.min.css" />
+	</environment>
+	<environment exclude="Development">
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+			  asp-fallback-href="css/bootstrap/bootstrap.min.css"
+			  asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute"
+			  crossorigin="anonymous"
+			  integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" />
+	</environment>
+	<link href="css/site.css" rel="stylesheet" />
+
+	@* This references the Kendo SASS theme already for use with Telerik Blazor components
+		Make sure that you only use that and you do not add other Kendo themes	*@
     <link rel="stylesheet" href="_content/Telerik.UI.for.Blazor/css/kendo-theme-default/all.css" />
     <script src="_content/Telerik.UI.for.Blazor/js/telerik-blazor.js" defer></script>
+	@* jQuery and Kendo scripts. You may need more depending on what you use *@
+	<script src="https://code.jquery.com/jquery-1.12.3.min.js"></script>
+	<script src="https://kendo.cdn.telerik.com/2019.2.619/js/kendo.all.min.js"></script>
+
 </head>
 <body>
     <app><component type="typeof(App)" render-mode="ServerPrerendered" /></app>
@@ -28,6 +44,10 @@
         <a class="dismiss">🗙</a>
     </div>
 
-    <script src="_framework/blazor.server.js"></script>
+	<script src="_framework/blazor.server.js"></script>
+
+	@* our Blazor app JS Interop file for working with jQuery widgets *@
+	<script src="~/myJsInteropForjQueryWidgets.js" defer></script>
+
 </body>
 </html>

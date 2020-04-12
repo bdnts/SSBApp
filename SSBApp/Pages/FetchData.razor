@@ -6,12 +6,24 @@
 
 <p>This component demonstrates fetching data from a service.</p>
 
-@if (forecasts == null)
+@if (forecasts.Count == 0)
 {
     <p><em>Loading...</em></p>
 }
 else
 {
+	<TelerikGrid Data=@forecasts Height="400px">
+		<GridColumns>
+			<GridColumn Field="Date">
+				<Template>
+					@((context as WeatherForecast).Date.ToString("MMMM dd, yyyy"))
+				</Template>
+			</GridColumn>
+			<GridColumn Field="TemperatureC" Title="Temp. C" />
+			<GridColumn Field="Summary" />
+		</GridColumns>
+	</TelerikGrid>
+
     <table class="table">
         <thead>
             <tr>
@@ -36,10 +48,18 @@ else
 }
 
 @code {
-    WeatherForecast[] forecasts;
+	List<WeatherForecast> forecasts { get; set; } = new List<WeatherForecast>();
 
     protected override async Task OnInitializedAsync()
     {
         forecasts = await ForecastService.GetForecastAsync(DateTime.Now);
     }
+}
+
+
+@code {
+	void Test() {
+		System.Collections.ObjectModel.ObservableCollection<string> col = new System.Collections.ObjectModel.ObservableCollection<string>();
+		
+	}
 }
